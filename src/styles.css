@@ -1,0 +1,191 @@
+body {
+  font-family: sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  margin: 5px 0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.wrapper ul {
+  padding: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+/* -----------インプット------------ */
+.input-area {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  background-color: #dadfe0;
+  width: 400px;
+  height: anto;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 8px;
+}
+
+.input-area input,
+textarea {
+  width: 70%;
+  padding: 8px 10px;
+  margin: 5px 0 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  color: #666;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.input-area textarea {
+  min-width: 70%;
+  max-width: 70%;
+  min-height: 100px;
+  max-height: 300px;
+}
+
+.input-area input.detail {
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.input-area .button-area span {
+  margin-right: 8px;
+}
+
+/* -----------未完了------------- */
+.incomplete {
+  background-color: #d4d4d4;
+  width: 400px;
+  min-height: 200px;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 8px;
+}
+
+.list-row {
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  list-style: none;
+
+  margin: 0 auto 20px;
+  padding: 10px;
+
+  background: #F2F2F2;
+  color: #666;
+  border-radius: 15px;
+}
+
+.title-area {
+  width: 95%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-area .index {
+  width: 10%;
+  display: inline-block;
+  text-align: center;
+  margin-right: 5px;
+  font-size: 12px;
+  line-height: 30px;
+}
+
+.title-area input.todotitle {
+  width: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 27px;
+  padding-left: 5px;
+  margin-right: 5px;
+  background: #F2F2F2;
+  border: none;
+  color: #666;
+
+}
+
+.title-area input.todotitle:hover {
+  opacity: 0.7;
+}
+
+.title-area input.todotitle:focus {
+  opacity: 1;
+  background: #fff;
+}
+
+.title-area .status {
+  width: 40%;
+  border-color: #FFF;
+  border-radius: 10px;
+  font-size: 10px;
+  padding-left: 5px;
+}
+
+.detail-area {
+  width: 92.5%;
+  height: auto;
+  min-height: 50px;
+  display: flex;
+  background: #fff;
+  margin: 8px 0;
+  padding: 5px 7pxpx;
+  border-radius: 5px;
+  font-size: 11px;
+
+}
+
+.incomplete .button-area {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.button-area button {
+  width: 90px;
+  border-radius: 16px;
+  border: none;
+  padding: 4px 16px;
+  background: #F2F2F2;
+}
+
+.button-area button:hover {
+  background-color: #ff8a9d;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* -----------完了------------ */
+.complete {
+  background-color: #b0b0b0;
+  width: 400px;
+  min-height: 200px;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 8px;
+}
+
+.complete .title-area {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.complete .title-area .todotitle {
+  margin-left: 10px;
+}
