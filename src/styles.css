@@ -49,6 +49,11 @@ textarea {
   font-family: monospace;
 }
 
+input:focus,
+textarea:focus {
+  border: 1px solid #666;
+}
+
 .input-area textarea {
   min-width: 70%;
   max-width: 70%;
@@ -86,7 +91,7 @@ textarea {
   margin: 0 auto 20px;
   padding: 10px;
 
-  background: #F2F2F2;
+  background: #f2f2f2;
   color: #666;
   border-radius: 15px;
 }
@@ -114,10 +119,9 @@ textarea {
   line-height: 27px;
   padding-left: 5px;
   margin-right: 5px;
-  background: #F2F2F2;
+  background: #f2f2f2;
   border: none;
   color: #666;
-
 }
 
 .title-area input.todotitle:hover {
@@ -131,7 +135,7 @@ textarea {
 
 .title-area .status {
   width: 40%;
-  border-color: #FFF;
+  border-color: #fff;
   border-radius: 10px;
   font-size: 10px;
   padding-left: 5px;
@@ -147,7 +151,6 @@ textarea {
   padding: 5px 7pxpx;
   border-radius: 5px;
   font-size: 11px;
-
 }
 
 .incomplete .button-area {
@@ -162,7 +165,7 @@ textarea {
   border-radius: 16px;
   border: none;
   padding: 4px 16px;
-  background: #F2F2F2;
+  background: #f2f2f2;
 }
 
 .button-area button:hover {
