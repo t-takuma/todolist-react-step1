@@ -1,7 +1,7 @@
 import React from "react";
 
 export const InputTodo = (props) => {
-  const { todoContents, onChangeTitle, onChangeDetail, onClick, disabled } = props;
+  const { todoContents, onChangeDate, onChangeTitle, onChangeDetail, onClick, disabled } = props;
   return (
     <div className="input-area">
       <p className="title">Add todo</p>
@@ -11,6 +11,14 @@ export const InputTodo = (props) => {
         placeholder="タスク名を入力..."
         value={todoContents.title}
         onChange={onChangeTitle}
+      />
+      <input
+        className="deadline"
+        disabled={disabled}
+        placeholder="期限を入力..."
+        type="date"
+        value={todoContents.date}
+        onChange={onChangeDate}
       />
       <textarea
         className="detail"

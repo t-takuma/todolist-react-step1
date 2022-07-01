@@ -9,7 +9,9 @@ export const App = () => {
   // オブジェクトとして扱い、タイトルと詳細はプロパティとして初期値を空登録
   const [todoContents, setTodoContents] = useState({
     title: "",
+    date: "",
     detail: "",
+    status: "todo",
   });
   // 未完了タスク
   const [incompleteTodos, setIncompleteTodos] = useState([]);
@@ -19,15 +21,21 @@ export const App = () => {
 
 
   // タスク入力時イベント_タイトル
-  // タイトルはevent.target.valueで取得、詳細はuseStateの値から引用する
+  // タイトルはevent.target.valueで取得、詳細/期限はuseStateの値から引用する
   const onChangeTodoTitle = (event) => {
-    setTodoContents({ title: event.target.value, detail: todoContents.detail });
+    setTodoContents({ title: event.target.value, date: todoContents.date, detail: todoContents.detail, status: todoContents.status });
+  }
+  // タスク入力時イベント_期限
+  // 詳細はevent.target.valueで取得、タイトル/詳細はuseStateの値から引用する
+  const onChangeTodoDate = (event) => {
+    setTodoContents({ title: todoContents.title, date: event.target.value, detail: todoContents.detail, status: todoContents.status });
   }
   // タスク入力時イベント_詳細
-  // 詳細はevent.target.valueで取得、タイトルはuseStateの値から引用する
+  // 詳細はevent.target.valueで取得、タイトル/期限はuseStateの値から引用する
   const onChangeTodoDetail = (event) => {
-    setTodoContents({ title: todoContents.title, detail: event.target.value });
+    setTodoContents({ title: todoContents.title, date: todoContents.date, detail: event.target.value, status: todoContents.status });
   }
+
 
   // タスク登録ボタン押下時イベント
   const onClickAdd = () => {
@@ -37,14 +45,21 @@ export const App = () => {
     //追加ボタン押したら入力項目を空にする
     setTodoContents({
       title: "",
+      date: "",
       detail: "",
+      status: "todo",
     });
   };
   //削除ボタンイベント
-  const onClickDelete = (index) => {
+  const onClickDeleteIncomplete = (index) => {
     const newTodos = [...incompleteTodos];
     newTodos.splice(index, 1);
     setIncompleteTodos(newTodos);
+  };
+  const onClickDeleteComplete = (index) => {
+    const newTodos = [...completeTodos];
+    newTodos.splice(index, 1);
+    setCompleteTodos(newTodos);
   };
   // 完了ボタンイベント
   const onClickComplete = (index) => {
@@ -64,31 +79,60 @@ export const App = () => {
     const newIncompletetodos = [...incompleteTodos, completeTodos[index]];
     setIncompleteTodos(newIncompletetodos);
   };
+
+
+  // ----------------------------編集--------------------------------
   //未完了エリアでのタイトル編集
   const onChangeIncompleteTitle = (e, index) => {
     const newIncompleteTodosTitle = [...incompleteTodos];
-    newIncompleteTodosTitle.splice(index, 1, { title: e.target.value, detail: incompleteTodos[index].detail });
+    newIncompleteTodosTitle.splice(index, 1, { ...incompleteTodos[index], title: e.target.value });
     setIncompleteTodos(newIncompleteTodosTitle);
   }
+  //未完了エリアでの期限編集
+  const onChangeIncompleteDate = (e, index) => {
+    const newIncompleteTodosDate = [...incompleteTodos];
+    newIncompleteTodosDate.splice(index, 1, { ...incompleteTodos[index], date: e.target.value });
+    setIncompleteTodos(newIncompleteTodosDate);
+  }
+
   //未完了エリアでの詳細編集
   const onChangeIncompleteDetail = (e, index) => {
     const newIncompleteTodosDetail = [...incompleteTodos];
-    newIncompleteTodosDetail.splice(index, 1, { title: incompleteTodos[index].title, detail: e.target.value });
+    newIncompleteTodosDetail.splice(index, 1, { ...incompleteTodos[index], detail: e.target.value });
     setIncompleteTodos(newIncompleteTodosDetail);
   }
+
+  //未完了エリアでのステータス編集
+  const onChangeIncompleteStatus = (e, index) => {
+    const newIncompleteTodosStatus = [...incompleteTodos];
+    newIncompleteTodosStatus.splice(index, 1, { ...incompleteTodos[index], status: e.target.value });
+  }
+
+
   //完了エリアでのタイトル編集
   const onChangeCompleteTitle = (e, index) => {
     const newCompleteTodosTitle = [...completeTodos];
-    newCompleteTodosTitle.splice(index, 1, { title: e.target.value, detail: completeTodos[index].detail });
+    newCompleteTodosTitle.splice(index, 1, { ...completeTodos[index], title: e.target.value });
     setCompleteTodos(newCompleteTodosTitle);
+  }
+  //完了エリアでの期限編集
+  const onChangeCompleteDate = (e, index) => {
+    const newCompleteTodosDate = [...completeTodos];
+    newCompleteTodosDate.splice(index, 1, { ...completeTodos[index], date: e.target.value });
+    setCompleteTodos(newCompleteTodosDate);
   }
   //完了エリアでの詳細編集
   const onChangeCompleteDetail = (e, index) => {
     const newCompleteTodosDetail = [...completeTodos];
-    newCompleteTodosDetail.splice(index, 1, { title: completeTodos[index].title, detail: e.target.value });
+    newCompleteTodosDetail.splice(index, 1, { ...completeTodos[index], detail: e.target.value });
     setCompleteTodos(newCompleteTodosDetail);
   }
 
+
+  // ステータス絞り込み機能
+  const onChangeFilterStatus = (e) => {
+
+  };
 
   return (
     <>
@@ -96,6 +140,7 @@ export const App = () => {
         <InputTodo
           todoContents={todoContents}
           onChangeTitle={onChangeTodoTitle}
+          onChangeDate={onChangeTodoDate}
           onChangeDetail={onChangeTodoDetail}
           onClick={onClickAdd}
           disabled={incompleteTodos.length >= 5}
@@ -106,15 +151,21 @@ export const App = () => {
         <IncompleteTodos
           todos={incompleteTodos}
           onChangeTitle={onChangeIncompleteTitle}
+          onChangeDate={onChangeIncompleteDate}
           onChangeDetail={onChangeIncompleteDetail}
+          onChangeStatus={onChangeIncompleteStatus}
           onClickComplete={onClickComplete}
-          onClickDelete={onClickDelete}
+          onClickDelete={onClickDeleteIncomplete}
+          onChangeFilterStatus={onChangeFilterStatus}
         />
         <CompleteTodos
           todos={completeTodos}
           onChangeTitle={onChangeCompleteTitle}
+          onChangeDate={onChangeCompleteDate}
           onChangeDetail={onChangeCompleteDetail}
-          onClickBack={onClickBack} />
+          onClickBack={onClickBack}
+          onClickDelete={onClickDeleteComplete}
+        />
       </div>
     </>
   );

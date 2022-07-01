@@ -1,28 +1,37 @@
 import React from "react";
+import { TodoStatus } from "./TodoStatus";
 
 export const IncompleteTodos = (props) => {
-  const { todos, onChangeTitle, onChangeDetail, onClickComplete, onClickDelete } = props;
+  const { todos, onChangeTitle, onChangeDate, onChangeDetail, onChangeStatus, onClickComplete, onClickDelete, onChangeFilterStatus } = props;
   return (
     <div className="incomplete">
       <p className="title">Todo</p>
-      <ul>
+      <div>
+        <div>
+          <select key="todo-status" defaultValue="all" onChange={() => onChangeFilterStatus()}>
+            <option value="todo">未着手</option>
+            <option value="doing">進行中</option>
+            <option value="pending">保留</option>
+          </select>
+        </div>
         {todos.map((todo, index) => {
           return (
             <>
-
-              <div key={todo.title} className="list-row">
+              <div key={todo.id} className="list-row">
                 <div className="title-area">
-                  <span className="index">#-{index + 1}</span>
+                  <p className="index"><span>#-{index + 1}</span></p>
                   <input
                     className="todotitle"
                     value={todo.title}
+                    placeholder="タスク名を入力..."
                     onChange={(e) => onChangeTitle(e, index)}
                   />
-                  <select className="status">
-                    <option value="未着手">まだ</option>
-                    <option value="着手中">今やってる</option>
-                    <option value="保留">ちょっと待って...！</option>
-                  </select>
+                  <input className="deadline"
+                    type="date"
+                    value={todo.date}
+                    onChange={(e) => onChangeDate(e, index)}
+                  />
+                  <TodoStatus onChangeStatus={onChangeStatus} index={index} />
                 </div>
                 <textarea
                   className="detail-area"
@@ -37,7 +46,7 @@ export const IncompleteTodos = (props) => {
             </>
           );
         })}
-      </ul>
-    </div>
+      </div>
+    </div >
   );
 };
