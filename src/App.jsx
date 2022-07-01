@@ -5,25 +5,35 @@ import { IncompleteTodos } from "./components/IncompleteTodos.jsx";
 import { CompleteTodos } from "./components/CompleteTodos.jsx";
 
 export const App = () => {
+  // タスク登録
+  // オブジェクトとして扱い、タイトルと詳細はプロパティとして初期値を空登録
   const [todoContents, setTodoContents] = useState({
     title: "",
     detail: "",
   });
+  // 未完了タスク
   const [incompleteTodos, setIncompleteTodos] = useState([]);
-
+  // 完了タスク 
   const [completeTodos, setCompleteTodos] = useState([]);
 
+
+
+  // タスク入力時イベント_タイトル
+  // タイトルはevent.target.valueで取得、詳細はuseStateの値から引用する
   const onChangeTodoTitle = (event) => {
     setTodoContents({ title: event.target.value, detail: todoContents.detail });
   }
+  // タスク入力時イベント_詳細
+  // 詳細はevent.target.valueで取得、タイトルはuseStateの値から引用する
   const onChangeTodoDetail = (event) => {
     setTodoContents({ title: todoContents.title, detail: event.target.value });
   }
 
+  // タスク登録ボタン押下時イベント
   const onClickAdd = () => {
-    if (todoContents.title === "") return alert("本当にやることないの...？"); //何も入力しなかった時はアラートを表示
-    const newTodos = [...incompleteTodos, todoContents]; //初期値＋追加入力値
-    setIncompleteTodos(newTodos);
+    if (todoContents.title === "") return alert("本当にやることないの...？"); //タイトルを何も入力しなかった時はアラートを表示
+    const newTodos = [...incompleteTodos, todoContents]; //新規未完了タスク＝既存タスク＋新規追加タスク
+    setIncompleteTodos(newTodos);//useStateで未完了タスクの状態を変更
     //追加ボタン押したら入力項目を空にする
     setTodoContents({
       title: "",
