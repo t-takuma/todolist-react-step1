@@ -76,6 +76,7 @@ export const App = () => {
     newCompleteTodos.splice(index, 1);
     setCompleteTodos(newCompleteTodos);
 
+    completeTodos[index].status = 'todo';
     const newIncompletetodos = [...incompleteTodos, completeTodos[index]];
     setIncompleteTodos(newIncompletetodos);
   };
