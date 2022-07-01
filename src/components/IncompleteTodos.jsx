@@ -2,13 +2,14 @@ import React from "react";
 import { TodoStatus } from "./TodoStatus";
 
 export const IncompleteTodos = (props) => {
-  const { todos, onChangeTitle, onChangeDate, onChangeDetail, onChangeStatus, onClickComplete, onClickDelete, onChangeFilterStatus } = props;
+  const { todos, onChangeTitle, onChangeDate, onChangeDetail, onChangeStatus, onClickComplete, onClickDelete, onChangeFilteredTodos } = props;
   return (
     <div className="incomplete">
       <p className="title">Todo</p>
       <div>
         <div>
-          <select key="todo-status" defaultValue="all" onChange={() => onChangeFilterStatus()}>
+          <select defaultValue="all" onChange={(e) => onChangeFilteredTodos(e)}>
+            <option value="all">すべて</option>
             <option value="todo">未着手</option>
             <option value="doing">進行中</option>
             <option value="pending">保留</option>
@@ -17,7 +18,7 @@ export const IncompleteTodos = (props) => {
         {todos.map((todo, index) => {
           return (
             <>
-              <div key={todo.id} className="list-row">
+              <div key={`${index}-${todo.title}`} id={`incomplete-${index}`} className="list-row incomplete-todo">
                 <div className="title-area">
                   <p className="index"><span>#-{index + 1}</span></p>
                   <input

@@ -8,7 +8,7 @@ export const CompleteTodos = (props) => {
       <div>
         {todos.map((todo, index) => {
           return (
-            <div key={todo.id} className="list-row">
+            <div key={`${index}-${todo.title}`} id={`complete-${index}`} className="list-row">
               <div className="title-area">
                 <p className="index"><span>#-{index + 1}</span></p>
                 <input
