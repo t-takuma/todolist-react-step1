@@ -7,8 +7,8 @@
 ## 設計方針/工夫した点
 * タスク登録/削除/完了に関して
     * 各タスク登録に関してはタイトル/期限/詳細/ステータスをプロパティとするtodocontentsというオブジェクト変数に持たせ、未完了タスク/完了タスク全体はそれぞれそのオブジェクトを要素として持つ配列として全体の処理を考えました
-        * task = {title : --- , date : ---, detail : ---, status: ---}
-        * incomplete/complete_tasks = [
+        * `task = {title : --- , date : ---, detail : ---, status: ---}`
+        * `incomplete/complete_tasks = [
             {
                 title: ---,
                 date: ---,
@@ -22,7 +22,7 @@
                 status: ---,
             }
             ...
-        ]
+        ]`
 
     * 削除/完了/戻すイベントに関しては、同様の設計として作成しました
         1. 対象タスクのindexを引数として受け取る
