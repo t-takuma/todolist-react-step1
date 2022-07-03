@@ -2,7 +2,7 @@ import React from "react";
 import { TodoStatus } from "./TodoStatus";
 
 export const IncompleteTodos = (props) => {
-  const { todos, setTodos,/* onChangeTitle, onChangeDate, onChangeDetail, onChangeStatus */ editTodos, onClickComplete, onClickDelete, onChangeFilteredTodos } = props;
+  const { todos, setTodos, editTodos, onClickComplete, onClickDelete, onChangeFilteredTodos } = props;
   return (
     <>
       <div className="incomplete">

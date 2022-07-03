@@ -137,7 +137,7 @@ export const App = () => {
 
 
   // ステータス絞り込み機能
-  // もっといいやり方があるはず、、、
+  // もっと違うやり方にしていく
   const onChangeFilteredTodos = (e) => {
     console.log(e.target.value);
     if (e.target.value == 'all') {
