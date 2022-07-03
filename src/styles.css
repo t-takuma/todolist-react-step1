@@ -187,7 +187,33 @@ textarea {
   background-color: #ff8a9d;
   color: #fff;
   cursor: pointer;
+  transition: 0.1s;
 }
+
+/* 絞り込み */
+.filter-status {
+  width: 70%;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
+  margin: 0px auto 10px;
+}
+
+.filter-status button {
+  width: 20%;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 15px;
+  font-size: 10px;
+}
+
+.filter-status button:hover {
+  background-color: #ff8a9d;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
 
 /* -----------完了------------ */
 .complete {
