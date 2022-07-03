@@ -214,6 +214,17 @@ textarea {
   transition: 0.1s;
 }
 
+@media screen and (max-width: 480px) {
+  .filter-status {
+    width: 90%;
+  }
+
+  .filter-status button {
+    width: 25%;
+    margin: 0 5px 0;
+  }
+}
+
 
 /* -----------完了------------ */
 .complete {
