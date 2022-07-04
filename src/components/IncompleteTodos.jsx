@@ -11,7 +11,7 @@ export const IncompleteTodos = (props) => {
           <button onClick={(e) => onChangeFilteredTodos(e)} value="all">すべて</button>
           <button onClick={(e) => onChangeFilteredTodos(e)} value="waiting">未着手</button>
           <button onClick={(e) => onChangeFilteredTodos(e)} value="doing">進行中</button>
-          <button onClick={(e) => onChangeFilteredTodos(e)} value="pending">放置プレイ</button>
+          <button onClick={(e) => onChangeFilteredTodos(e)} value="pending">放置</button>
         </div>
         {todos.map((todo, index) => {
           return (
