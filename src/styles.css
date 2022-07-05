@@ -19,18 +19,17 @@
 }
 
 @media screen and (max-width: 480px) {
-
   /* 480px以下に適用されるCSS（スマホ用） */
   .input-area,
   .incomplete,
   .complete {
     width: 90%;
   }
-
 }
 
 input,
 textarea {
+  -webkit-appearance: none;
   border: 2px solid #fff;
 }
 
@@ -224,7 +223,6 @@ textarea {
     margin: 0 5px 0;
   }
 }
-
 
 /* -----------完了------------ */
 .complete {
