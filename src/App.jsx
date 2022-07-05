@@ -9,6 +9,7 @@ export const App = () => {
   // タスク登録
   // オブジェクトとして扱い、タイトルと詳細はプロパティとして初期値を空登録
   const [todoContents, setTodoContents] = useState({
+    id: "",
     title: "",
     date: "",
     detail: "",
@@ -19,7 +20,11 @@ export const App = () => {
   // 完了タスク
   const [completeTodos, setCompleteTodos] = useState([]);
 
-
+  function getUniqueStr(myStrong) {
+    var strong = 1000;
+    if (myStrong) strong = myStrong;
+    return new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16)
+  }
 
   // ----------------------------タスク登録--------------------------------
   // タスク入力時イベント_タイトル
@@ -42,10 +47,12 @@ export const App = () => {
   const onClickAdd = () => {
     if (todoContents.title === "") return alert("本当にやることないの...？"); //タイトルを何も入力しなかった時はアラートを表示
     todoContents.status = "waiting"; //登録時のステータスは未着手状態とする
+    todoContents.id = getUniqueStr();
     const newTodos = [...incompleteTodos, todoContents]; //新規未完了タスク＝既存タスク＋新規追加タスク
     setIncompleteTodos(newTodos); //useStateで未完了タスクの状態を変更
     //追加ボタン押したら入力項目を空にする
     setTodoContents({
+      id: "",
       title: "",
       date: "",
       detail: "",

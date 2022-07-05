@@ -25,7 +25,7 @@ export const IncompleteTodos = (props) => {
         {todos.map((todo, index) => {
           return (
             <>
-              <div key={`incomplete-${index}}`} id={`incomplete-${index}`} className="list-row incomplete-todo">
+              <div key={todo.id} id={`incomplete-${index}`} className="list-row incomplete-todo">
                 <div className="title-area">
                   <p className="index"><span>#-{index + 1}</span></p>
                   <input
