@@ -2,16 +2,25 @@ import React from "react";
 import { TodoStatus } from "./TodoStatus";
 
 export const IncompleteTodos = (props) => {
-  const { todos, setTodos, editTodos, onClickComplete, onClickDelete, onChangeFilteredTodos } = props;
+  const { todos, editIncompleteTodos, onClickComplete, onClickDelete, onChangeFilteredTodos } = props;
+  const statuses = [
+    { value: "all", text: "すべて" },
+    { value: "waiting", text: "未着手" },
+    { value: "doing", text: "進行中" },
+    { value: "done", text: "放置" },
+  ];
   return (
     <>
       <div className="incomplete">
         <p className="title">Todo</p>
         <div className="filter-status">
-          <button onClick={(e) => onChangeFilteredTodos(e)} value="all">すべて</button>
-          <button onClick={(e) => onChangeFilteredTodos(e)} value="waiting">未着手</button>
-          <button onClick={(e) => onChangeFilteredTodos(e)} value="doing">進行中</button>
-          <button onClick={(e) => onChangeFilteredTodos(e)} value="pending">放置</button>
+          {statuses.map((status) => {
+            return (
+              <>
+                <button key={`${status.value}`} onClick={(e) => onChangeFilteredTodos(e)} value={status.value}>{status.text}</button>
+              </>
+            );
+          })}
         </div>
         {todos.map((todo, index) => {
           return (
@@ -23,25 +32,23 @@ export const IncompleteTodos = (props) => {
                     className="todotitle"
                     value={todo.title}
                     placeholder="タスク名を入力..."
-                    onChange={(e) => editTodos(e, index, todos, setTodos, 'title')}
+                    onChange={(e) => editIncompleteTodos(e, index, 'title')}
                   />
                   <input
                     className="deadline"
                     type="date"
                     value={todo.date}
-                    onChange={(e) => editTodos(e, index, todos, setTodos, 'date')}
+                    onChange={(e) => editIncompleteTodos(e, index, 'date')}
                   />
                   <TodoStatus
-                    todos={todos}
-                    setTodos={setTodos}
-                    editTodos={editTodos}
+                    editTodos={editIncompleteTodos}
                     index={index} />
                 </div>
                 <textarea
                   className="detail-area"
                   value={todo.detail}
                   placeholder="詳細を入力..."
-                  onChange={(e) => editTodos(e, index, todos, setTodos, 'detail')} />
+                  onChange={(e) => editIncompleteTodos(e, index, 'detail')} />
                 <div className="button-area">
                   <button onClick={() => onClickComplete(index)}><i className="fas fa-check"></i></button>
                   <button onClick={() => onClickDelete(index)}><i className="fas fa-trash-alt"></i></button>

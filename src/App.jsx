@@ -4,7 +4,6 @@ import "./styles.css";
 import { InputTodo } from "./components/InputTodo.jsx";
 import { IncompleteTodos } from "./components/IncompleteTodos.jsx";
 import { CompleteTodos } from "./components/CompleteTodos.jsx";
-import { EditTodos } from "./EditTodos";
 
 export const App = () => {
   // タスク登録
@@ -20,6 +19,9 @@ export const App = () => {
   // 完了タスク
   const [completeTodos, setCompleteTodos] = useState([]);
 
+
+
+  // ----------------------------タスク登録--------------------------------
   // タスク入力時イベント_タイトル
   // タイトルはevent.target.valueで取得、他はuseStateの値から引用する
   const onChangeTodoTitle = (event) => {
@@ -50,6 +52,9 @@ export const App = () => {
       status: ""
     });
   };
+
+
+  // ----------------------------タスク完了/削除/戻し--------------------------------
   //削除ボタンイベント
   const onClickDeleteIncomplete = (index) => {
     const newTodos = [...incompleteTodos];
@@ -82,7 +87,19 @@ export const App = () => {
     setIncompleteTodos(newIncompletetodos);
   };
 
-  // ----------------------------編集--------------------------------
+  // ----------------------------タスク編集--------------------------------
+  // タスク編集_未完了タスク
+  const EditIncompleteTodos = (e, index, property) => {
+    const newTodos = [...incompleteTodos];
+    newTodos.splice(index, 1, { ...incompleteTodos[index], [property]: e.target.value });
+    setIncompleteTodos(newTodos);
+  };
+  // タスク編集_完了タスク
+  const EditCompleteTodos = (e, index, property) => {
+    const newTodos = [...completeTodos];
+    newTodos.splice(index, 1, { ...completeTodos[index], [property]: e.target.value });
+    setCompleteTodos(newTodos);
+  };
   /* 
     //未完了エリアでのタイトル編集
     const onChangeIncompleteTitle = (e, index) => {
@@ -132,18 +149,18 @@ export const App = () => {
     };
     */
 
-  // ステータス絞り込み機能
+  // ----------------------------タスク絞り込み（ステータス）--------------------------------
   // もっと違うやり方にしていく
   const onChangeFilteredTodos = (e) => {
     console.log(e.target.value);
-    if (e.target.value == "all") {
+    if (e.target.value === "all") {
       var todoElements = document.getElementsByClassName("incomplete-todo");
       for (var i = 0; i < incompleteTodos.length; i++) {
         todoElements[i].style.display = "flex";
       }
     } else {
       for (var i = 0; i < incompleteTodos.length; i++) {
-        if (incompleteTodos[i].status == e.target.value) {
+        if (incompleteTodos[i].status === e.target.value) {
           document.getElementById(`incomplete-${i}`).style.display = "flex";
         } else {
           document.getElementById(`incomplete-${i}`).style.display = "none";
@@ -168,16 +185,14 @@ export const App = () => {
         )}
         <IncompleteTodos
           todos={incompleteTodos}
-          setTodos={setIncompleteTodos}
-          editTodos={EditTodos}
+          editIncompleteTodos={EditIncompleteTodos}
           onClickComplete={onClickComplete}
           onClickDelete={onClickDeleteIncomplete}
           onChangeFilteredTodos={onChangeFilteredTodos}
         />
         <CompleteTodos
           todos={completeTodos}
-          setTodos={setCompleteTodos}
-          editTodos={EditTodos}
+          editCompleteTodos={EditCompleteTodos}
           onClickBack={onClickBack}
           onClickDelete={onClickDeleteComplete}
         />
