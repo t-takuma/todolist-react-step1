@@ -31,7 +31,6 @@ input,
 textarea {
   -webkit-appearance: none;
   border: 2px solid #fff;
-  color: #666;
 }
 
 input:focus,
@@ -68,7 +67,7 @@ textarea {
 }
 
 .input-area input {
-  height: 25px;
+  height: 20px;
 }
 
 .input-area textarea {
