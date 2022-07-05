@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import "./destyle.css";
 import "./styles.css";
 import { InputTodo } from "./components/InputTodo.jsx";
 import { IncompleteTodos } from "./components/IncompleteTodos.jsx";
@@ -12,14 +13,12 @@ export const App = () => {
     title: "",
     date: "",
     detail: "",
-    status: "",
+    status: ""
   });
   // 未完了タスク
   const [incompleteTodos, setIncompleteTodos] = useState([]);
-  // 完了タスク 
+  // 完了タスク
   const [completeTodos, setCompleteTodos] = useState([]);
-
-
 
   // タスク入力時イベント_タイトル
   // タイトルはevent.target.valueで取得、他はuseStateの値から引用する
@@ -37,19 +36,18 @@ export const App = () => {
     setTodoContents({ ...todoContents, detail: event.target.value });
   };
 
-
   // タスク登録ボタン押下時イベント
   const onClickAdd = () => {
     if (todoContents.title === "") return alert("本当にやることないの...？"); //タイトルを何も入力しなかった時はアラートを表示
-    todoContents.status = "waiting" //登録時のステータスは未着手状態とする
+    todoContents.status = "waiting"; //登録時のステータスは未着手状態とする
     const newTodos = [...incompleteTodos, todoContents]; //新規未完了タスク＝既存タスク＋新規追加タスク
-    setIncompleteTodos(newTodos);//useStateで未完了タスクの状態を変更
+    setIncompleteTodos(newTodos); //useStateで未完了タスクの状態を変更
     //追加ボタン押したら入力項目を空にする
     setTodoContents({
       title: "",
       date: "",
       detail: "",
-      status: "",
+      status: ""
     });
   };
   //削除ボタンイベント
@@ -79,11 +77,10 @@ export const App = () => {
     newCompleteTodos.splice(index, 1);
     setCompleteTodos(newCompleteTodos);
 
-    completeTodos[index].status = 'waiting'; //未完了ステータスに変更
+    completeTodos[index].status = "waiting"; //未完了ステータスに変更
     const newIncompletetodos = [...incompleteTodos, completeTodos[index]];
     setIncompleteTodos(newIncompletetodos);
   };
-
 
   // ----------------------------編集--------------------------------
   /* 
@@ -135,18 +132,16 @@ export const App = () => {
     };
     */
 
-
   // ステータス絞り込み機能
   // もっと違うやり方にしていく
   const onChangeFilteredTodos = (e) => {
     console.log(e.target.value);
-    if (e.target.value == 'all') {
+    if (e.target.value == "all") {
       var todoElements = document.getElementsByClassName("incomplete-todo");
       for (var i = 0; i < incompleteTodos.length; i++) {
-        todoElements[i].style.display = "flex"
+        todoElements[i].style.display = "flex";
       }
-    }
-    else {
+    } else {
       for (var i = 0; i < incompleteTodos.length; i++) {
         if (incompleteTodos[i].status == e.target.value) {
           document.getElementById(`incomplete-${i}`).style.display = "flex";
