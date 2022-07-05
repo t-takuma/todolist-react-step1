@@ -180,7 +180,7 @@ export const App = () => {
     { value: "all", text: "すべて" },
     { value: "waiting", text: "未着手" },
     { value: "doing", text: "進行中" },
-    { value: "done", text: "放置" },
+    { value: "pending", text: "放置" },
   ];
 
   return (
