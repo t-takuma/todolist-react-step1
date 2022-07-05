@@ -67,6 +67,10 @@ textarea {
   font-family: monospace;
 }
 
+.input-area input {
+  height: 25px;
+}
+
 .input-area textarea {
   height: 100px;
 }
