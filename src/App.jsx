@@ -176,6 +176,13 @@ export const App = () => {
     }
   };
 
+  const statuses = [
+    { value: "all", text: "すべて" },
+    { value: "waiting", text: "未着手" },
+    { value: "doing", text: "進行中" },
+    { value: "done", text: "放置" },
+  ];
+
   return (
     <>
       <div className="wrapper">
@@ -190,19 +197,47 @@ export const App = () => {
         {incompleteTodos.length >= 5 && (
           <p style={{ color: "red" }}>タスクを消化しましょう。。</p>
         )}
-        <IncompleteTodos
-          todos={incompleteTodos}
-          editIncompleteTodos={EditIncompleteTodos}
-          onClickComplete={onClickComplete}
-          onClickDelete={onClickDeleteIncomplete}
-          onChangeFilteredTodos={onChangeFilteredTodos}
-        />
-        <CompleteTodos
-          todos={completeTodos}
-          editCompleteTodos={EditCompleteTodos}
-          onClickBack={onClickBack}
-          onClickDelete={onClickDeleteComplete}
-        />
+
+
+        <div className="incomplete">
+          <p className="title">Todo</p>
+          <div className="filter-status">
+            {statuses.map((status) => {
+              return (
+                <button key={`${status.value}`} onClick={(e) => onChangeFilteredTodos(e)} value={status.value}>{status.text}</button>
+              );
+            })}
+          </div>
+          {incompleteTodos.map((incompleteTodo, index) => {
+            return (
+              < IncompleteTodos
+                key={incompleteTodo.id}
+                index={index}
+                todo={incompleteTodo}
+                editIncompleteTodos={EditIncompleteTodos}
+                onClickComplete={onClickComplete}
+                onClickDelete={onClickDeleteIncomplete}
+                onChangeFilteredTodos={onChangeFilteredTodos}
+              />
+            );
+          })}
+        </div>
+
+        <div className="complete">
+          <p className="title">Done</p>
+          {completeTodos.map((completeTodo, index) => {
+            return (
+              <CompleteTodos
+                key={completeTodo.id}
+                index={index}
+                todo={completeTodo}
+                editCompleteTodos={EditCompleteTodos}
+                onClickBack={onClickBack}
+                onClickDelete={onClickDeleteComplete}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );
