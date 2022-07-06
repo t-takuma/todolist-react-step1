@@ -159,7 +159,6 @@ export const App = () => {
   // ----------------------------タスク絞り込み（ステータス）--------------------------------
   // もっと違うやり方にしていく
   const onChangeFilteredTodos = (e) => {
-    console.log(e.target.value);
     if (e.target.value === "all") {
       var todoElements = document.getElementsByClassName("incomplete-todo");
       for (var i = 0; i < incompleteTodos.length; i++) {
